@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WILD KINGDOM ZOO |a ワイルドキングダム動物園</title>
+<meta name="description" content="野生の鼓動を、すぐそばで。ワイルドキングダム動物園（ダミーサイト）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0b0a; --bg2: #141412; --text: #f3efe6; --muted: #a9a496;
+    --gold: #e8a33d; --line: rgba(255,255,255,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: "Noto Sans JP", sans-serif; line-height: 1.8; overflow-x: hidden; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; background: #222; }
+  a { color: inherit; text-decoration: none; }
+  .en { font-family: "Oswald", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 110px 0; }
+  .eyebrow { color: var(--gold); font-size: .85rem; letter-spacing: .3em; }
+  h2 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.2; margin: 8px 0 16px; font-weight: 700; }
+  .lead { color: var(--muted); max-width: 560px; }
+  .btn { display: inline-block; padding: 14px 34px; border-radius: 999px; background: var(--gold); color: #111; font-weight: 700; letter-spacing: .1em; transition: transform .3s, box-shadow .3s; }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(232,163,61,.35); }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.5); margin-left: 12px; }
+
+  /* nav */
+  header { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s; }
+  header.solid { background: rgba(11,11,10,.85); backdrop-filter: blur(12px); }
+  .nav { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+  .logo { font-family: "Oswald"; font-size: 1.4rem; font-weight: 700; letter-spacing: .18em; }
+  .logo b { color: var(--gold); }
+  nav ul { display: flex; gap: 32px; list-style: none; font-size: .85rem; letter-spacing: .12em; }
+  nav a:hover { color: var(--gold); }
+  .burger { display: none; background: none; border: 0; color: var(--text); font-size: 1.6rem; cursor: pointer; }
+
+  /* hero */
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; padding: 0; overflow: hidden; }
+  .hero-img { position: absolute; inset: 0; }
+  .hero-img img { object-position: 62% 30%; transform: scale(1.08); animation: zoom 18s ease-out forwards; }
+  @keyframes zoom { to { transform: scale(1); } }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.05) 55%, rgba(11,11,10,1) 100%); }
+  .hero .wrap { position: relative; z-index: 2; padding-bottom: 64px; }
+  .hero h1, .hero p { text-shadow: 0 2px 24px rgba(0,0,0,.55); }
+  .hero h1 { font-family: "Oswald"; font-size: clamp(2.4rem, 6.5vw, 5.5rem); line-height: 1; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; animation: up 1.2s .2s both; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { margin: 14px 0 26px; font-size: clamp(.95rem, 1.6vw, 1.1rem); max-width: 480px; animation: up 1.2s .5s both; }
+  .hero .cta { animation: up 1.2s .8s both; }
+  @keyframes up { from { opacity: 0; transform: translateY(40px); } }
+  .scroll { position: absolute; right: 24px; bottom: 40px; z-index: 2; writing-mode: vertical-rl; font-size: .7rem; letter-spacing: .3em; color: var(--muted); }
+
+  /* stats */
+  .stats { padding: 0; border-block: 1px solid var(--line); background: var(--bg2); }
+  .stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 44px 16px; text-align: center; border-right: 1px solid var(--line); }
+  .stat:last-child { border: 0; }
+  .stat strong { display: block; font-family: "Oswald"; font-size: clamp(2.2rem, 5vw, 3.6rem); color: var(--gold); line-height: 1.1; }
+  .stat span { font-size: .8rem; color: var(--muted); letter-spacing: .15em; }
+
+  /* about */
+  .about .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .collage { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px; gap: 14px; }
+  .collage div { overflow: hidden; border-radius: 18px; }
+  .collage div:first-child { grid-row: span 2; }
+  .collage img { transition: transform .8s; }
+  .collage div:hover img { transform: scale(1.08); }
+
+  /* animals */
+  .animals { background: var(--bg2); }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 16px; margin-top: 48px; }
+  .card { position: relative; overflow: hidden; border-radius: 20px; }
+  .card.tall { grid-row: span 2; }
+  .card.wide { grid-column: span 2; }
+  .card img { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .card:hover img { transform: scale(1.1); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.85)); }
+  .card figcaption { position: absolute; z-index: 2; left: 22px; right: 22px; bottom: 18px; }
+  .card h3 { font-family: "Oswald"; font-size: 1.6rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
+  .card small { color: var(--gold); font-size: .8rem; letter-spacing: .1em; }
+  .card p { font-size: .8rem; color: #d8d3c6; max-height: 0; opacity: 0; overflow: hidden; transition: all .5s; }
+  .card:hover p { max-height: 60px; opacity: 1; margin-top: 4px; }
+
+  /* events */
+  .event-list { margin-top: 48px; display: grid; gap: 16px; }
+  .event { display: grid; grid-template-columns: 220px 90px 1fr auto; gap: 28px; align-items: center; padding: 14px 28px 14px 14px; border: 1px solid var(--line); border-radius: 22px; transition: background .3s, border-color .3s; }
+  .event:hover { background: rgba(255,255,255,.04); border-color: var(--gold); }
+  .event .pic { height: 120px; border-radius: 14px; overflow: hidden; }
+  .event .time { font-family: "Oswald"; font-size: 1.8rem; color: var(--gold); }
+  .event h3 { font-size: 1.15rem; }
+  .event p { color: var(--muted); font-size: .88rem; }
+  .tag { font-size: .7rem; letter-spacing: .15em; padding: 4px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+  /* tickets */
+  .tickets { background: var(--bg2); }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .price { border: 1px solid var(--line); border-radius: 24px; padding: 38px 30px; text-align: center; position: relative; transition: transform .4s; }
+  .price:hover { transform: translateY(-8px); }
+  .price.hot { border-color: var(--gold); background: linear-gradient(180deg, rgba(232,163,61,.12), transparent); }
+  .price.hot::before { content: "POPULAR"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #111; font-size: .7rem; font-weight: 700; letter-spacing: .2em; padding: 2px 16px; border-radius: 999px; }
+  .price h3 { font-size: 1rem; letter-spacing: .15em; color: var(--muted); }
+  .price .yen { font-family: "Oswald"; font-size: 3.4rem; margin: 10px 0; }
+  .price ul { list-style: none; color: var(--muted); font-size: .9rem; margin-top: 12px; }
+  .price li { padding: 6px 0; border-top: 1px solid var(--line); }
+
+  /* strip */
+  .strip { padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); height: 260px; }
+  .strip div { overflow: hidden; }
+  .strip img { transition: transform .8s, filter .8s; filter: grayscale(.6); }
+  .strip div:hover img { transform: scale(1.12); filter: none; }
+
+  /* access */
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  dl { border-top: 1px solid var(--line); margin-top: 28px; }
+  dl div { display: grid; grid-template-columns: 120px 1fr; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  dt { color: var(--gold); font-size: .85rem; letter-spacing: .15em; }
+  dd { color: #ddd8cb; }
+  .map { border-radius: 24px; overflow: hidden; min-height: 340px; position: relative; }
+  .map::after { content: "📍 WILD KINGDOM ZOO"; position: absolute; left: 20px; bottom: 20px; background: rgba(0,0,0,.7); backdrop-filter: blur(8px); padding: 8px 18px; border-radius: 999px; font-size: .8rem; letter-spacing: .1em; }
+
+  footer { padding: 50px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; text-align: center; }
+  footer .logo { color: var(--text); display: block; margin-bottom: 10px; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s, transform 1s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    section { padding: 80px 0; }
+    .about .wrap, .info { grid-template-columns: 1fr; gap: 40px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; }
+    .price-grid { grid-template-columns: 1fr; }
+    .event { grid-template-columns: 140px 1fr; gap: 14px 20px; }
+    .event .pic { grid-row: span 3; height: 110px; }
+    .event .tag { justify-self: start; }
+    .strip { grid-template-columns: repeat(3, 1fr); height: 320px; grid-template-rows: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .burger { display: block; }
+    nav ul { position: fixed; inset: 72px 0 auto 0; flex-direction: column; gap: 0; background: rgba(11,11,10,.96); max-height: 0; overflow: hidden; transition: max-height .4s; }
+    nav ul.open { max-height: 400px; }
+    nav li a { display: block; padding: 18px 24px; border-top: 1px solid var(--line); }
+    .stats .wrap { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .btn.ghost { margin: 12px 0 0; }
+    .gallery { grid-auto-rows: 200px; gap: 10px; }
+    .card.wide { grid-column: span 2; }
+    .card figcaption { left: 14px; bottom: 12px; }
+    .card h3 { font-size: 1.15rem; }
+    .scroll { display: none; }
+    .event { grid-template-columns: 1fr; padding: 14px; }
+    .event .pic { grid-row: auto; height: 160px; }
+    .collage { grid-template-rows: 180px 180px; }
+    dl div { grid-template-columns: 90px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap nav">
+    <a href="#top" class="logo">WILD<b>.</b>KINGDOM</a>
+    <nav>
+      <ul id="menu">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#animals">ANIMALS</a></li>
+        <li><a href="#events">EVENTS</a></li>
+        <li><a href="#tickets">TICKETS</a></li>
+        <li><a href="#access">ACCESS</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-img">
+    <img src="img/lion.jpg" alt="たてがみをなびかせるライオン" fetchpriority="high">
+  </div>
+  <div class="wrap">
+    <p class="eyebrow en">Wild Kingdom Zoo</p>
+    <h1>Feel the <span>Wild.</span></h1>
+    <p>野生の鼓動を、すぐそばで。<br>百獣の王から小さな命まで、120種・1,500頭との出会いが待っています。</p>
+    <div class="cta"><a href="#tickets" class="btn">チケットを購入</a><a href="#animals" class="btn ghost">動物を見る</a></div>
+  </div>
+  <div class="scroll en">Scroll</div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><strong>120+</strong><span>SPECIES / 動物の種類</span></div>
+    <div class="stat"><strong>1,500</strong><span>ANIMALS / 動物の数</span></div>
+    <div class="stat"><strong>45</strong><span>HECTARES / 敷地(ha)</span></div>
+    <div class="stat"><strong>365</strong><span>DAYS OPEN / 年中無休</span></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow en">About</p>
+      <h2>檻の向こうではなく、<br>同じ大地の上で。</h2>
+      <p class="lead">ワイルドキングダム動物園は、動物本来の暮らしを再現した「生態展示」を追求する動物園です。サバンナ、ジャングル、極地。世界各地の環境を再現したエリアで、動物たちのありのままの姿をご覧いただけます。</p>
+      <p class="lead" style="margin-top:14px">※このページはダミーサイトです。掲載内容は架空のものです。</p>
+    </div>
+    <div class="collage reveal">
+      <div><img loading="lazy" src="img/elephant.jpg" alt="ゾウ"></div>
+      <div><img loading="lazy" src="img/giraffe.jpg" alt="キリン"></div>
+      <div><img loading="lazy" src="img/zebra.jpg" alt="シマウマ"></div>
+    </div>
+  </div>
+</section>
+
+<section class="animals" id="animals">
+  <div class="wrap">
+    <p class="eyebrow en reveal">Animals</p>
+    <h2 class="reveal">出会いたい、<br>あの子たち。</h2>
+    <div class="gallery">
+      <figure class="card tall reveal"><img loading="lazy" src="img/tiger.jpg" alt="トラ"><figcaption><small>SAVANNA ZONE</small><h3>Tiger</h3><p>森の孤高のハンター。しなやかな動きは圧巻。</p></figcaption></figure>
+      <figure class="card reveal"><img loading="lazy" src="img/elephant.jpg" alt="ゾウ"><figcaption><small>AFRICA</small><h3>Elephant</h3><p>家族の絆が深い、陸上最大の動物。</p></figcaption></figure>
+      <figure class="card reveal"><img loading="lazy" src="img/giraffe.jpg" alt="キリン"><figcaption><small>AFRICA</small><h3>Giraffe</h3><p>高さ5mから見下ろす優しい目。</p></figcaption></figure>
+      <figure class="card tall reveal"><img loading="lazy" src="img/panda.jpg" alt="パンダ"><figcaption><small>ASIA</small><h3>Panda</h3><p>竹をほおばる姿に癒やされる。</p></figcaption></figure>
+      <figure class="card wide reveal"><img loading="lazy" src="img/penguin.jpg" alt="ペンギン"><figcaption><small>POLAR HOUSE</small><h3>Penguin</h3><p>水中を飛ぶように泳ぐ姿は必見。</p></figcaption></figure>
+      <figure class="card reveal"><img loading="lazy" src="img/zebra.jpg" alt="シマウマ"><figcaption><small>SAVANNA ZONE</small><h3>Zebra</h3><p>一頭一頭ちがう、世界に一つの縞模様。</p></figcaption></figure>
+      <figure class="card reveal"><img loading="lazy" src="img/monkey.jpg" alt="サル"><figcaption><small>JUNGLE</small><h3>Monkey</h3><p>好奇心旺盛。目が合うかも？</p></figcaption></figure>
+      <figure class="card reveal"><img loading="lazy" src="img/polarbear.jpg" alt="シロクマ"><figcaption><small>POLAR HOUSE</small><h3>Polar Bear</h3><p>ガラス越しに迫る大迫力のダイブ。</p></figcaption></figure>
+      <figure class="card reveal"><img loading="lazy" src="img/flamingo.jpg" alt="フラミンゴ"><figcaption><small>WETLAND</small><h3>Flamingo</h3><p>夕焼け色の群れが水辺を染める。</p></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <p class="eyebrow en reveal">Today's Events</p>
+    <h2 class="reveal">今日のイベント</h2>
+    <div class="event-list">
+      <article class="event reveal"><div class="pic"><img loading="lazy" src="img/lion.jpg" alt=""></div><div class="time">10:30</div><div><h3>ライオン・モーニングフィード</h3><p>迫力の食事タイムを飼育員の解説つきで。</p></div><span class="tag">SAVANNA</span></article>
+      <article class="event reveal"><div class="pic"><img loading="lazy" src="img/penguin.jpg" alt=""></div><div class="time">13:00</div><div><h3>ペンギン・パレード</h3><p>園内をよちよち行進。間近で撮影OK。</p></div><span class="tag">POLAR</span></article>
+      <article class="event reveal"><div class="pic"><img loading="lazy" src="img/elephant.jpg" alt=""></div><div class="time">15:00</div><div><h3>ゾウのシャワータイム</h3><p>豪快な水浴びを観察しよう。</p></div><span class="tag">AFRICA</span></article>
+      <article class="event reveal"><div class="pic"><img loading="lazy" src="img/owl.jpg" alt=""></div><div class="time">17:30</div><div><h3>ナイトズー・ウォーク</h3><p>夜行性動物たちの素顔に出会う特別ツアー。</p></div><span class="tag">NIGHT</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="strip" aria-hidden="true">
+  <div><img loading="lazy" src="img/leopard.jpg" alt=""></div>
+  <div><img loading="lazy" src="img/parrot.jpg" alt=""></div>
+  <div><img loading="lazy" src="img/gorilla.jpg" alt=""></div>
+  <div><img loading="lazy" src="img/koala.jpg" alt=""></div>
+  <div><img loading="lazy" src="img/hippo.jpg" alt=""></div>
+  <div><img loading="lazy" src="img/redpanda.jpg" alt=""></div>
+</section>
+
+<section class="tickets" id="tickets">
+  <div class="wrap">
+    <p class="eyebrow en reveal">Tickets</p>
+    <h2 class="reveal">チケット</h2>
+    <div class="price-grid">
+      <div class="price reveal"><h3>ADULT / おとな</h3><div class="yen">¥2,200</div><ul><li>1日入園</li><li>園内マップ付き</li></ul></div>
+      <div class="price hot reveal"><h3>ANNUAL / 年間パス</h3><div class="yen">¥6,000</div><ul><li>1年間入り放題</li><li>ナイトズー優待</li><li>ショップ10%OFF</li></ul></div>
+      <div class="price reveal"><h3>CHILD / こども</h3><div class="yen">¥800</div><ul><li>小・中学生</li><li>未就学児は無料</li></ul></div>
+    </div>
+    <p style="text-align:center;margin-top:44px" class="reveal"><a href="#" class="btn">オンラインで購入</a></p>
+  </div>
+</section>
+
+<section id="access">
+  <div class="wrap info">
+    <div class="reveal">
+      <p class="eyebrow en">Access</p>
+      <h2>ご利用案内</h2>
+      <dl>
+        <div><dt>OPEN</dt><dd>9:30〜17:00（最終入園 16:00）</dd></div>
+        <div><dt>CLOSED</dt><dd>年中無休（臨時休園あり）</dd></div>
+        <div><dt>ADDRESS</dt><dd>〒000-0000 ○○県○○市ワイルド町1-2-3（架空）</dd></div>
+        <div><dt>ACCESS</dt><dd>○○駅からバスで15分／駐車場1,000台</dd></div>
+      </dl>
+    </div>
+    <div class="map reveal"><img loading="lazy" src="img/safari.jpg" alt="園内の風景"></div>
+  </div>
+</section>
+
+<footer>
+  <span class="logo">WILD<b style="color:var(--gold)">.</b>KINGDOM</span>
+  © 2026 Wild Kingdom Zoo — Dummy site for demonstration. Photos: Wikimedia Commons.
+</footer>
+
+<script>
+  const hd = document.getElementById("hd");
+  addEventListener("scroll", () => hd.classList.toggle("solid", scrollY > 60), { passive: true });
+  const menu = document.getElementById("menu");
+  document.getElementById("burger").onclick = () => menu.classList.toggle("open");
+  menu.addEventListener("click", () => menu.classList.remove("open"));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  // 画像が読み込めない場合の予備
+  document.querySelectorAll("img").forEach(i => i.addEventListener("error", () => { i.style.opacity = .3; }, { once: true }));
+</script>
+</body>
+</html>
